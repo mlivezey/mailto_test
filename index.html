@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <p>Opening email... <a id="link" href="#">click here if nothing happens</a></p>
+        <script>
+            var params = new URLSearchParams(window.location.search);
+            var to = params.get("to") || "";
+            var subject = params.get("subject") || "";
+            var body = params.get("body") || "";
+
+            var mailto = "mailto:" + to;
+            var query = [];
+            if (subject) query.push("subject=" + encodeURIComponent(subject));
+            if (body) query.push("body=" + encodeURIComponent(body));
+            if (query.length) mailto += "?" + query.join("&");
+
+            document.getElementById("link").href = mailto;
+            window.location.href = mailto;
+        </script>
+    </body>
+</html>
